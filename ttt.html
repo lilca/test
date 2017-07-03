@@ -1,0 +1,17 @@
+<script>
+window.onload=function(){
+ var a = document.getElementsByTagName('div');
+ a[0].onmousedown = function(obj, e){div_eledown(obj, e, 0);return false;};
+ a[0].ontouchstart = function(obj, e){div_eledown(obj, e, 1);return false;};
+}
+window.onresize=function(){
+}
+function div_eledown(obj, e, m){
+  alert(m);
+}
+
+function user(e){
+  alert(e.pageX+":"+e.pageY);
+}
+</script>
+<div style="background-color:#000;" oneledown="user();">tesu001</div>
