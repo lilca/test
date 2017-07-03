@@ -1,32 +1,54 @@
 <script>
 window.onload=function(){
  var a = document.getElementsByTagName('div');
- a.eventmode = 0;
- a[0].onmousedown = function(e){div_eledown(e, 0);return false;};
- a[0].ontouchstart = function(e){div_eledown(e, 1);return false;};
+ for(var idx=0; idx<a.length; idx++){
+   ele_set(a[idx]);
+ }
 }
 var TOUCH_MODE = -1;
+var ttt = 3435;
 window.onresize=function(){
 }
-function div_eledown(e, m){
+
+
+function ele_set(cur){
+  cur.onmousedown = function(e){eleevent(e, 0);return false;};
+  cur.ontouchstart = function(e){eleevent(e,100);return false;};
+  cur.onmouseup = function(e){eleevent(e, 1);return false;};
+  cur.ontouchend = function(e){eleevent(e, 101);return false;};
+  cur.onmousemove = function(e){eleevent(e, 2);return false;};
+  cur.ontouchmove = function(e){eleevent(e, 102);return false;};
+}
+function eleevent(e, m){
   var tar = e.target;
-  if( TOUCH_MODE != -1 && TOUCH_MODE != m )
+  var funcname;
+  var func;
+  var type = m % 100;
+  if(type == 0){ funcname = tar.getAttribute("oneledown"); }
+  if(type == 1){ funcname = tar.getAttribute("oneleup"); }
+  if(type == 2){ funcname = tar.getAttribute("onelemove"); }
+  if( funcname == null )
     return;
-  TOUCH_MODE = m;
+  func = new Function("e", funcname);
+  //
+  var mode = Math.floor(m / 100);
+  if( TOUCH_MODE != -1 && TOUCH_MODE !=  mode )
+    return;
+  TOUCH_MODE = mode;
   var eve;
-  if( m == 1 ){
+  if( mode == 1 ){
     eve = e.changedTouches[0];
   }
   else{
     eve = e;
   }
-  var funcname = tar.getAttribute("oneledown");
-  var func = new Function("e", funcname);
+  //
   func(e);
 }
 
 function user(e){
-  alert(e.pageX+":"+e.pageY+', '+e.type);
+  alert(e.pageX+":"+e.pageY+', '+e.type+'='+e.target.id);
 }
 </script>
-<div id="my" style="background-color:#000;" oneledown="user(e);">tesu001</div>
+<div id="my" style="background-color:#000;" oneleup="user(e);" onelemoe="alert('move');">tesu001</div>
+<div id="mr" style="background-color:#0f0;" oneleup="user(e);" onelemoe="alert('move');">tesu001</div>
