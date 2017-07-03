@@ -2,7 +2,7 @@
 window.onload=function(){
  var a = document.getElementsByTagName('div');
  a.eventmode = 0;
- a[0].onmousedown = function(e){div_eledown(e, 0);return false;};
+ a[0].onmousedown = function(e){div_eledown(e, 1);return false;};
  a[0].ontouchstart = function(e){div_eledown(e, 1);return false;};
 }
 window.onresize=function(){
@@ -13,8 +13,8 @@ function div_eledown(e, m){
   var eve;
   alert(e.type+","+m);
   if( m == 1 ){
-    alert(e.type+","+e.changedTouched[0]);
-    eve = e.changedTouched[0];
+    alert(e.type+","+e.changedTouches[0]);
+    eve = e.changedTouches[0];
   }
   else eve = e;
   var funcname = tar.getAttribute("oneledown");
