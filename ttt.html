@@ -12,6 +12,7 @@ function div_eledown(e, m){
   var tar = e.target;
   if( TOUCH_MODE != -1 && TOUCH_MODE != m )
     return;
+  TOUCH_MODE = m;
   var eve;
   if( m == 1 ){
     eve = e.changedTouches[0];
