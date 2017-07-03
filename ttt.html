@@ -8,13 +8,12 @@ window.onload=function(){
 window.onresize=function(){
 }
 function div_eledown(e, m){
-  alert(e.type);
   var tar = e.target;
   tar.eventmode++;
   var eve;
   if( m == 1 ) eve = e.changedTouched[0];
   else eve = e;
-
+alert(e.type+","+e.pageX);
   var funcname = tar.getAttribute("oneledown");
   var func = new Function("e", funcname);
   func(e);
