@@ -12,7 +12,10 @@ function div_eledown(e, m){
   tar.eventmode++;
   var eve;
   alert(e.type+","+m);
-  if( m == 1 ) eve = e.changedTouched[0];
+  if( m == 1 ){
+    alert(e.type+","+e.changedTouched[0]);
+    eve = e.changedTouched[0];
+  }
   else eve = e;
   var funcname = tar.getAttribute("oneledown");
   var func = new Function("e", funcname);
