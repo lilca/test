@@ -2,7 +2,7 @@
 window.onload=function(){
  var a = document.getElementsByTagName('div');
  a.eventmode = 0;
- a[0].onmousedown = function(e){div_eledown(e, 1);return false;};
+ a[0].onmousedown = function(e){div_eledown(e, 0);return false;};
  a[0].ontouchstart = function(e){div_eledown(e, 1);return false;};
 }
 window.onresize=function(){
