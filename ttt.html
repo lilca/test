@@ -5,18 +5,20 @@ window.onload=function(){
  a[0].onmousedown = function(e){div_eledown(e, 0);return false;};
  a[0].ontouchstart = function(e){div_eledown(e, 1);return false;};
 }
+var TOUCH_MODE = -1;
 window.onresize=function(){
 }
 function div_eledown(e, m){
   var tar = e.target;
-  tar.eventmode++;
+  if( TOUCH_MODE != -1 && TOUCH_MODE != m )
+    return;
   var eve;
-  alert(e.type+","+m);
   if( m == 1 ){
-    alert(e.type+","+e.changedTouches[0]);
     eve = e.changedTouches[0];
   }
-  else eve = e;
+  else{
+    eve = e;
+  }
   var funcname = tar.getAttribute("oneledown");
   var func = new Function("e", funcname);
   func(e);
